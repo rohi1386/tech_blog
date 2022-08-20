@@ -30,23 +30,71 @@ class MainScreen extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: size.width / 1.19,
-                    height: size.height / 4.2,
+                    width: size.width / 1.10 ,
+                    height: size.height / 4.1,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       image: new DecorationImage(
                           image: new AssetImage('assets/img/programming.png'),
                           fit: BoxFit.cover),
                     ),
                     foregroundDecoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(16)),
+
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       gradient: LinearGradient(
                         colors: GradiantColors.homePosterCoverGradiant,
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
                     ),
-                  )
+                  ),
+
+                  Positioned(
+                    bottom: 16,
+                    left: 0,
+                    right: 0,
+                    child:
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text("روح اله عزیر - یک روز پیش",
+                                style: TextStyle(
+                                  color: SolidColors.posterSubTitle,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Text("253",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: SolidColors.posterSubTitle,
+                                    ),
+                                  ),
+                                  SizedBox(width: 5),
+                                  Icon(CupertinoIcons.eye_solid,
+                                    color: Colors.white,
+                                    size: 15,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        Text("دوازده قدم برنامه نویسی یک دوره ی...",
+                          style: TextStyle(
+                            color: SolidColors.posterTitle,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ],
