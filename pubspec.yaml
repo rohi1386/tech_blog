@@ -66,6 +66,11 @@ flutter:
     - assets/img/programming.png
     - assets/img/soal.png
     - assets/img/hot.png
+    - assets/img/pad.png
+    - assets/img/user.png
+    - assets/img/barg.png
+    - assets/img/home.png
+    - assets/img/profile.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
