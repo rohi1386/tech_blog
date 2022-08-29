@@ -32,6 +32,7 @@ dependencies:
   intl: ^0.17.0
   expandable_text: 2.3.0
   flutter_spinkit: ^5.1.0
+  flutter_svg: ^1.1.4
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -71,6 +72,11 @@ flutter:
     - assets/img/barg.png
     - assets/img/home.png
     - assets/img/profile.png
+    - assets/img/searchS.svg
+    - assets/img/homeS.svg
+    - assets/img/penS.svg
+    - assets/img/userS.svg
+    - assets/img/menuS.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

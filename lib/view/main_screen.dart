@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/my_colors.dart';
 import 'package:tech_blog/my_string.dart';
@@ -19,10 +20,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     double bodyMargin = size.width / 17;
-    List<Widget> mainScreenPage = [
-      buildSingleChildScrollView(size, bodyMargin),
-      ProfileScreen(),
-    ];
+
 
     return SafeArea(
       child: Scaffold(
@@ -32,20 +30,18 @@ class _MainScreenState extends State<MainScreen> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(
-                Icons.menu,
-                color: Colors.black54,
-                size: 25,
-              ),
+              SvgPicture.asset('assets/img/menuS.svg',height: 25,),
               Image.asset(
                 "assets/img/logo.png",
                 height: size.height / 13.6,
               ),
-              const Icon(
-                CupertinoIcons.search,
-                color: Colors.black54,
-                size: 25,
-              ),
+
+          SvgPicture.asset('assets/img/searchS.svg',height: 25,),
+              // const Icon(
+              //   CupertinoIcons.search,
+              //   color: Colors.black54,
+              //   size: 25,
+              // ),
             ],
           ),
         ),
@@ -53,7 +49,13 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             Center(
               child: Positioned.fill(
-                child: mainScreenPage[selectedPageIndex],
+                child:IndexedStack(
+                  index: selectedPageIndex,
+                  children: [
+                    buildSingleChildScrollView(size, bodyMargin),
+                    ProfileScreen(),
+                  ],
+                ),
               ),
             ),
             BottomNavigation(
@@ -119,29 +121,20 @@ class BottomNavigation extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () => changeScreen(0),
-                  icon: const ImageIcon(
-                    AssetImage(
-                      "assets/img/home.png",
-                    ),
-                    color: Colors.white,
+                  icon: SvgPicture.asset(
+                   'assets/img/homeS.svg',height: 30,
                   ),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const ImageIcon(
-                    AssetImage(
-                      "assets/img/barg.png",
-                    ),
-                    color: Colors.white,
+                  icon: SvgPicture.asset(
+                    'assets/img/penS.svg',height: 30,
                   ),
                 ),
                 IconButton(
                   onPressed: () => changeScreen(1),
-                  icon: const ImageIcon(
-                    AssetImage(
-                      "assets/img/user.png",
-                    ),
-                    color: Colors.white,
+                  icon: SvgPicture.asset(
+                    'assets/img/userS.svg',height: 30,
                   ),
                 ),
               ],
