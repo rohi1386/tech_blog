@@ -7,6 +7,7 @@ import 'package:tech_blog/my_colors.dart';
 import 'package:tech_blog/my_string.dart';
 import 'package:tech_blog/view/childScrollView.dart';
 import 'package:tech_blog/view/profile.dart';
+import 'package:tech_blog/view/register/registerInto.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -45,17 +46,18 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
         ),
+
+
         body: Stack(
           children: [
-            Center(
-              child: Positioned.fill(
-                child:IndexedStack(
-                  index: selectedPageIndex,
-                  children: [
-                    buildSingleChildScrollView(size, bodyMargin),
-                    ProfileScreen(),
-                  ],
-                ),
+            Positioned.fill(
+              child:IndexedStack(
+                index: selectedPageIndex,
+                children: [
+                  buildSingleChildScrollView(size, bodyMargin),
+                  ProfileScreen(),
+                  RegisterInto()
+                ],
               ),
             ),
             BottomNavigation(
@@ -126,7 +128,7 @@ class BottomNavigation extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => changeScreen(2),
                   icon: SvgPicture.asset(
                     'assets/img/penS.svg',height: 30,
                   ),

@@ -3,6 +3,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:tech_blog/my_colors.dart';
+import 'package:tech_blog/view/register/registerInto.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
 
@@ -37,8 +39,18 @@ class _MainPageState extends State<MainPage> {
         Locale('fa', ''), // farsi, no country code
       ],
       theme: ThemeData(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style:ButtonStyle(backgroundColor:
+          MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return SolidColors.seeMore;
+            }
+            return SolidColors.primeryColor;
+          })),
+        ),
         fontFamily: 'IranSans',
         textTheme: const TextTheme(
+
           headline1: TextStyle(
             fontFamily: 'IranSans',
             fontWeight: FontWeight.w700,
@@ -56,11 +68,13 @@ class _MainPageState extends State<MainPage> {
             fontSize: 14,
             color: Colors.green,
           ),
+
         ),
       ),
 
       debugShowCheckedModeBanner: false,
       home: splashScreen(),
+
     );
   }
 }
