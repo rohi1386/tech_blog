@@ -56,7 +56,8 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   buildSingleChildScrollView(size, bodyMargin),
                   ProfileScreen(),
-                  RegisterInto()
+                  RegisterInto(),
+
                 ],
               ),
             ),

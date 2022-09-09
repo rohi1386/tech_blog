@@ -9,7 +9,7 @@ class MyStrings{
   static const String myFavBlog ="مقالات مورد علاقه من";
   static const String myFavPodcast ="پادکست های مورد علاقه من";
   static const String logOut ="خروج از حساب کاربری";
-  static const String insertYourEmail ="لطفا ایمیلت رو وارد کن";
+  static const String insertYourEmail ="لطفا ایمیل خود را وارد نمایید...";
   static const String activateCode ="کد فعال سازی رو وارد کن ";
   static const String chooseCats ="دسته بندی هایی که دوست داری رو انتخاب کن";
   static const String welcom ="""به تک‌بلاگ خوش اومدی
