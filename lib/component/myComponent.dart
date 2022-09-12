@@ -1,8 +1,10 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/component/my_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class My_Divider extends StatelessWidget {
   const My_Divider({
@@ -109,5 +111,12 @@ class _SelectTagsState extends State<SelectTags> {
         ),
       ),
     );
+  }
+}
+
+myLanchUrl(String url) async{
+  var uri = Uri.parse(url);
+  if(await canLaunchUrl(Uri.parse(url))){
+    await launchUrl(uri);
   }
 }

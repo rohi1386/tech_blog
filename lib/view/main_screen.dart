@@ -2,23 +2,24 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:tech_blog/component/myComponent.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_string.dart';
+import 'package:tech_blog/services/dio_service.dart';
 import 'package:tech_blog/view/childScrollView.dart';
 import 'package:tech_blog/view/profile.dart';
 import 'package:tech_blog/view/register/registerInto.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class MainScreen extends StatefulWidget {
 
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
-class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+  MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +48,29 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 Divider(),
                 ListTile(
-                  title: Text("پروفایل کاربری"),
+                  title: Text("اشتراک گذاری "),
+                  onTap: () async{
+                    await Share.share(MyStrings.shareText);
+
+                  },
                 ),
                 Divider(),
                 ListTile(
-                  title: Text("پروفایل کاربری"),
+                  title: Text("تک بلاگ در گیت هاب"),
+                  onTap: () {
+                    myLanchUrl(MyStrings.techBlogGithubUrl);
+
+                  },
                 ),
 
               ],
             ),
           ),
         ),
+
+
+
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 1,
@@ -90,23 +103,21 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(
           children: [
             Positioned.fill(
-              child:IndexedStack(
-                index: selectedPageIndex,
+              child:Obx(() => IndexedStack(
+                index: selectedPageIndex.value,
                 children: [
                   buildSingleChildScrollView(size, bodyMargin),
                   ProfileScreen(),
                   RegisterInto(),
 
                 ],
-              ),
+              )),
             ),
             BottomNavigation(
               size: size,
               bodyMargin: bodyMargin,
               changeScreen: (int value) {
-                setState(() {
-                  selectedPageIndex = value;
-                });
+                  selectedPageIndex.value = value;
               },
             ),
           ],
