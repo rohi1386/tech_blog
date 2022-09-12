@@ -2,16 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/number_symbols_data.dart';
-import 'package:tech_blog/myComponent.dart';
-import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/my_string.dart';
+import 'package:tech_blog/models/fake_data.dart';
+import 'package:tech_blog/component/myComponent.dart';
+import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/my_cat.dart';
 import 'package:validators/validators.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 
-class MyCatSelected extends StatelessWidget{
+class MyCatSelected extends StatefulWidget{
+  @override
+  State<MyCatSelected> createState() => _MyCatSelectedState();
+}
+
+class _MyCatSelectedState extends State<MyCatSelected> {
   @override
   Widget build(BuildContext context) {
    return SafeArea(child:
@@ -70,13 +76,15 @@ class MyCatSelected extends StatelessWidget{
                  ),),
                  SizedBox(height: 20,),
 
+
+
                  SizedBox(
                    width: double.infinity,
                    height: 100,
                    child: GridView.builder(
                      physics: ClampingScrollPhysics(),
                      shrinkWrap: true,
-                       itemCount: 10,
+                       itemCount: tagList.length,
                        scrollDirection: Axis.horizontal,
                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                            crossAxisCount: 2,
@@ -86,10 +94,54 @@ class MyCatSelected extends StatelessWidget{
 
                        ),
                        itemBuilder: (context, index) {
-                         return Container(
-                           child: MainTags(index: index),
+                         return InkWell(
+                           onTap: () {
+                             setState(() {
+                               if(!selectedTags.contains(tagList[index])){
+                                 selectedTags.add(tagList[index]);
+                               }else{
+
+                               }
+
+                             });
+                           },
+                           child: Container(
+                             child: MainTags(index: index),
+                           ),
                          );
                        },
+                   ),
+                 ),
+
+
+
+
+
+
+
+
+                 Divider(),
+
+                 SizedBox(
+                   width: double.infinity,
+                   height: 100,
+                   child: GridView.builder(
+                     physics: ClampingScrollPhysics(),
+                     shrinkWrap: true,
+                     itemCount: selectedTags.length,
+                     scrollDirection: Axis.horizontal,
+                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                         crossAxisCount: 2,
+                         crossAxisSpacing: 5,
+                         mainAxisSpacing: 5,
+                         childAspectRatio: 0.3
+
+                     ),
+                     itemBuilder: (context, index) {
+                       return Container(
+                         child: SelectTags(index: index),
+                       );
+                     },
                    ),
                  ),
 
@@ -101,5 +153,4 @@ class MyCatSelected extends StatelessWidget{
        )
    );
   }
-
 }

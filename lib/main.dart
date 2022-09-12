@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:tech_blog/my_colors.dart';
+import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/view/register/registerInto.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 

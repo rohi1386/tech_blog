@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_blog/models/fake_data.dart';
-import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/my_string.dart';
+import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/childScrollView.dart';
 import 'package:tech_blog/view/profile.dart';
 import 'package:tech_blog/view/register/registerInto.dart';
 
 class MainScreen extends StatefulWidget {
+
+
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
 class _MainScreenState extends State<MainScreen> {
   var selectedPageIndex = 0;
 
@@ -25,13 +28,49 @@ class _MainScreenState extends State<MainScreen> {
 
     return SafeArea(
       child: Scaffold(
+        key: _key,
+        drawer: Drawer(
+          backgroundColor: SolidColors.scafoldBg,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
+              children: [
+                DrawerHeader(child:
+                    Image.asset("assets/img/logo.png" , scale: 3,),
+                ),
+                ListTile(
+                  title: Text("پروفایل کاربری"),
+                ),
+                Divider(),
+                ListTile(
+                  title: Text("پروفایل کاربری"),
+                ),
+                Divider(),
+                ListTile(
+                  title: Text("پروفایل کاربری"),
+                ),
+                Divider(),
+                ListTile(
+                  title: Text("پروفایل کاربری"),
+                ),
+
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 1,
           backgroundColor: Colors.white,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SvgPicture.asset('assets/img/menuS.svg',height: 25,),
+              InkWell(
+                onTap: () {
+                  _key.currentState!.openDrawer();
+                },
+                  child:
+                  SvgPicture.asset('assets/img/menuS.svg',height: 25,)),
               Image.asset(
                 "assets/img/logo.png",
                 height: size.height / 13.6,

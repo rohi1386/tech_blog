@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/number_symbols_data.dart';
-import 'package:tech_blog/my_colors.dart';
-import 'package:tech_blog/my_string.dart';
+import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/component/my_string.dart';
 import 'package:tech_blog/view/my_cat.dart';
 import 'package:validators/validators.dart';
 import 'package:flutter/cupertino.dart';
