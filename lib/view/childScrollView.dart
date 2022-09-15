@@ -2,12 +2,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_string.dart';
+import 'package:get/get.dart';
 
 
 SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
+
   return SingleChildScrollView(
     physics: const BouncingScrollPhysics(),
     child: Padding(
@@ -72,6 +75,105 @@ SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
     ),
   );
 }
+
+SizedBox listview_one(Size size, double bodyMargin) {
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+  return SizedBox(
+    height: size.height / 3.5,
+    child:
+    Obx(() => ListView.builder(
+        itemCount: homeScreenController.topVisitedList.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: ((context, index) {
+          return Padding(
+            padding: EdgeInsets.only(
+                right: index == 0 ? bodyMargin : 15),
+            child: Column(
+              children: [
+                Stack(children: [
+                  Container(
+                    height: size.height / 5.3,
+                    width: size.width / 2.5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(16)),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            homeScreenController.topVisitedList[index].image!),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    foregroundDecoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(16)),
+                      gradient: LinearGradient(
+                        colors: GradiantColors.blogPost,
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 16,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          homeScreenController.topVisitedList[index].author!,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: SolidColors.posterSubTitle,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              homeScreenController.topVisitedList[index].view!,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: SolidColors
+                                    .posterSubTitle,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 3,
+                            ),
+                            const Icon(
+                              CupertinoIcons.eye_solid,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
+                SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  width: size.width / 2.4,
+                  child: Text(
+                    homeScreenController.topVisitedList[index].title!,
+                    style: TextStyle(fontSize: 12),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                ),
+              ],
+            ),
+          );
+        })),
+    ),
+  );
+}
+
+
+
 
 
 
@@ -166,98 +268,7 @@ SizedBox listview_tow(Size size, double bodyMargin) {
 
 
 
-SizedBox listview_one(Size size, double bodyMargin) {
-  return SizedBox(
-          height: size.height / 3.5,
-          child: ListView.builder(
-              itemCount: blogList.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                      right: index == 0 ? bodyMargin : 15),
-                  child: Column(
-                    children: [
-                      Stack(children: [
-                        Container(
-                          height: size.height / 5.3,
-                          width: size.width / 2.5,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(16)),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  blogList[index].imageUrl),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          foregroundDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(16)),
-                            gradient: LinearGradient(
-                              colors: GradiantColors.blogPost,
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 16,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                blogList[index].writer,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: SolidColors.posterSubTitle,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    blogList[index].views,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: SolidColors
-                                          .posterSubTitle,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 3,
-                                  ),
-                                  Icon(
-                                    CupertinoIcons.eye_solid,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ]),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      SizedBox(
-                        width: size.width / 2.4,
-                        child: Text(
-                          blogList[index].title,
-                          style: TextStyle(fontSize: 12),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              })),
-        );
-}
+
 
 
 

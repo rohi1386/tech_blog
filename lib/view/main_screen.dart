@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:tech_blog/component/myComponent.dart';
+import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_string.dart';
@@ -21,6 +22,8 @@ class MainScreen extends StatelessWidget {
   RxInt selectedPageIndex = 0.obs;
   MainScreen({Key? key}) : super(key: key);
 
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -34,7 +37,8 @@ class MainScreen extends StatelessWidget {
           backgroundColor: SolidColors.scafoldBg,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ListView(
+            child:
+            ListView(
               children: [
                 DrawerHeader(child:
                     Image.asset("assets/img/logo.png" , scale: 3,),
