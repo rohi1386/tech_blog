@@ -21,6 +21,8 @@
 //   }
 // }
 
+import 'package:tech_blog/component/api_constant.dart';
+
 class PodcastModel {
   String? id;
   String? title;
@@ -40,7 +42,8 @@ class PodcastModel {
   PodcastModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
-    poster = json['poster'];
+
+    poster =ApiConstant.hostUrl +  json['poster'];
     publisher = json['publisher'];
     view = json['view'];
     createdAt = json['created_at'];
