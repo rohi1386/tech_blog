@@ -15,7 +15,7 @@ SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
     physics: const BouncingScrollPhysics(),
     child: Obx(()=>
        Padding(
-        padding: EdgeInsets.only(top: 16),
+        padding: const EdgeInsets.only(top: 16),
 
         child:homeScreenController.loading.value == false? Column(
           children: [
@@ -69,7 +69,7 @@ SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
             ),
 
             listview_tow(size, bodyMargin),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
           ],

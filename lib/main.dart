@@ -4,6 +4,8 @@ import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tech_blog/component/my_colors.dart';
+import 'package:tech_blog/view/article_list_screen.dart';
+import 'package:tech_blog/view/article_single_screen.dart';
 import 'package:tech_blog/view/register/registerInto.dart';
 import 'package:tech_blog/view/splash_screen.dart';
 
@@ -73,7 +75,7 @@ class _MainPageState extends State<MainPage> {
       ),
 
       debugShowCheckedModeBanner: false,
-      home: splashScreen(),
+      home: ArticleListScreen(),
 
     );
   }
