@@ -3,11 +3,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:tech_blog/controller/article_controller.dart';
+import 'package:tech_blog/controller/article_single_controller.dart';
 import 'package:tech_blog/controller/home_screen_controller.dart';
 import 'package:tech_blog/models/fake_data.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/component/my_string.dart';
 import 'package:get/get.dart';
+import 'package:tech_blog/view/article_list_screen.dart';
 
 SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
@@ -24,19 +27,25 @@ SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 20, 20, 10),
               child: Row(
-                children: const [
+                children:  [
                   ImageIcon(
                       color: SolidColors.colorTitle,
                       AssetImage("assets/img/hot.png")),
                   SizedBox(
                     width: 8,
                   ),
-                  Text(
-                    MyStrings.viewHotestBlog,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w900,
-                      color: SolidColors.colorTitle,
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(ArticleListScreen());
+
+                    },
+                    child: Text(
+                      MyStrings.viewHotestBlog,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                        color: SolidColors.colorTitle,
+                      ),
                     ),
                   ),
                 ],
@@ -84,6 +93,8 @@ SingleChildScrollView buildSingleChildScrollView(Size size, double bodyMargin) {
 
 SizedBox listview_one(Size size, double bodyMargin) {
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+
+  SingleArcticleController singleArcticleController = Get.put(SingleArcticleController());
   return SizedBox(
     height: size.height / 3.5,
     child: Obx(
@@ -91,94 +102,99 @@ SizedBox listview_one(Size size, double bodyMargin) {
           itemCount: homeScreenController.topVisitedList.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
-            return Padding(
-              padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
-              child: Column(
-                children: [
-                  Stack(children: [
-                    Container(
-                      height: size.height / 5.3,
-                      width: size.width / 2.5,
-                      //برای وقتی که عکس لود نشد این پکیج استفاده داره و همچنین لود یک آیکون قبل لود عکس
-                      child: CachedNetworkImage(
-                          imageUrl: homeScreenController.topVisitedList[index].image!,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                            image: DecorationImage(
-                              image:imageProvider,
-                              fit: BoxFit.cover,
+            return GestureDetector(
+              onTap: () {
+                  singleArcticleController.getArticleInfo(homeScreenController.topVisitedList[index].id);
+              },
+              child: Padding(
+                padding: EdgeInsets.only(right: index == 0 ? bodyMargin : 15),
+                child: Column(
+                  children: [
+                    Stack(children: [
+                      Container(
+                        height: size.height / 5.3,
+                        width: size.width / 2.5,
+                        //برای وقتی که عکس لود نشد این پکیج استفاده داره و همچنین لود یک آیکون قبل لود عکس
+                        child: CachedNetworkImage(
+                            imageUrl: homeScreenController.topVisitedList[index].image!,
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              image: DecorationImage(
+                                image:imageProvider,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        placeholder: (context, url) => const SpinKitFadingCube(
-                          color: SolidColors.primeryColor,
-                          size: 32.0,
-                        ),
-                        errorWidget: (context, url, error) => const Icon(Icons.image_not_supported_outlined,
-                        color: Colors.grey,
-                        size: 50.0,),
-                      ),
-                      foregroundDecoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                        gradient: LinearGradient(
-                          colors: GradiantColors.blogPost,
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 16,
-                      left: 0,
-                      right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            homeScreenController.topVisitedList[index].author!,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: SolidColors.posterSubTitle,
-                            ),
+                          placeholder: (context, url) => const SpinKitFadingCube(
+                            color: SolidColors.primeryColor,
+                            size: 32.0,
                           ),
-                          Row(
-                            children: [
-                              Text(
-                                homeScreenController
-                                    .topVisitedList[index].view!,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: SolidColors.posterSubTitle,
+                          errorWidget: (context, url, error) => const Icon(Icons.image_not_supported_outlined,
+                          color: Colors.grey,
+                          size: 50.0,),
+                        ),
+                        foregroundDecoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                          gradient: LinearGradient(
+                            colors: GradiantColors.blogPost,
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 16,
+                        left: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              homeScreenController.topVisitedList[index].author!,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                color: SolidColors.posterSubTitle,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  homeScreenController
+                                      .topVisitedList[index].view!,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: SolidColors.posterSubTitle,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 3,
-                              ),
-                              const Icon(
-                                CupertinoIcons.eye_solid,
-                                color: Colors.white,
-                                size: 15,
-                              ),
-                            ],
-                          ),
-                        ],
+                                SizedBox(
+                                  width: 3,
+                                ),
+                                const Icon(
+                                  CupertinoIcons.eye_solid,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    SizedBox(
+                      width: size.width / 2.4,
+                      child: Text(
+                        homeScreenController.topVisitedList[index].title!,
+                        style: TextStyle(fontSize: 12),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
                       ),
                     ),
-                  ]),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    width: size.width / 2.4,
-                    child: Text(
-                      homeScreenController.topVisitedList[index].title!,
-                      style: TextStyle(fontSize: 12),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           })),

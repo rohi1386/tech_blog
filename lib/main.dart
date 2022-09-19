@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 import 'package:tech_blog/component/my_colors.dart';
 import 'package:tech_blog/view/article_list_screen.dart';
 import 'package:tech_blog/view/article_single_screen.dart';
@@ -30,16 +31,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
+    return GetMaterialApp(
       // ignore: prefer_const_literals_to_create_immutables
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('fa', ''), // farsi, no country code
-      ],
+     locale: const Locale('fa'),
+
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style:ButtonStyle(backgroundColor:
@@ -75,7 +70,7 @@ class _MainPageState extends State<MainPage> {
       ),
 
       debugShowCheckedModeBanner: false,
-      home: ArticleListScreen(),
+      home: splashScreen(),
 
     );
   }
